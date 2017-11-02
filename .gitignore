@@ -4,3 +4,6 @@ CatKeeper/.idea
 CatKeeper/.gradle
 CatKeeper/build
 CatKeeper/app/build
+.DS_Store
+icons/
+page/
