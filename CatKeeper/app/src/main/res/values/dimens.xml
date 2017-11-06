@@ -20,4 +20,10 @@
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="ui_size_200">200dp</dimen>
+    <dimen name="ui_size_2">2dp</dimen>
+    <dimen name="ui_size_1">1dp</dimen>
+    <dimen name="ui_size_150">150dp</dimen>
+    <dimen name="ui_size_28">28dp</dimen>
+    <dimen name="ui_size_26">26dp</dimen>
+    <dimen name="ui_size_180">180dp</dimen>
 </resources>
