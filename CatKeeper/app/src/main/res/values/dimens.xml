@@ -26,4 +26,8 @@
     <dimen name="ui_size_28">28dp</dimen>
     <dimen name="ui_size_26">26dp</dimen>
     <dimen name="ui_size_180">180dp</dimen>
+    <dimen name="ui_size_210">210dp</dimen>
+    <dimen name="ui_size_350">350dp</dimen>
+    <dimen name="ui_size_8">8dp</dimen>
+    <dimen name="ui_size_100">100dp</dimen>
 </resources>
