@@ -1,18 +1,23 @@
 package com.tw.training.catkeeper.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.tw.training.catkeeper.R
-import kotlinx.android.synthetic.main.nearby_cat_list_item.*
+import com.tw.training.catkeeper.domain.CatsNearby
+import com.tw.training.catkeeper.presenter.CatsNearbyPresenter
+import com.tw.training.catkeeper.utils.HttpUtils
 
 
-class NearbyCatAdapter(val context: Context, val data: List<String>) : BaseAdapter() {
+class NearbyCatAdapter(val context: Context, val data: List<CatsNearby>?) : BaseAdapter() {
+    private lateinit var avatar: ImageView
+    private lateinit var thumbImage1: ImageView
+    private lateinit var thumbImage2: ImageView
+    private lateinit var thumbImage3: ImageView
     // infalter is used to dynamically create view
     val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -23,16 +28,34 @@ class NearbyCatAdapter(val context: Context, val data: List<String>) : BaseAdapt
         } else {
             view = convertView
         }
-        var content = view.findViewById<RelativeLayout>(R.id.content)
-//        content.text = data[position]
+        val content = view.findViewById<RelativeLayout>(R.id.content)
+        val name = view.findViewById<TextView>(R.id.name)
+        val description = view.findViewById<TextView>(R.id.description)
+        val timestamp = view.findViewById<TextView>(R.id.timestamp)
+        avatar = view.findViewById<ImageView>(R.id.avatar)
+
+        val currentData = data!![position]
+
+        downloadImage(currentData.avatar.imageUrl, avatar)
+
+        name.text = currentData.name
+        timestamp.text = currentData.updateTime.time.toString()
+        description.text = currentData.description
+
+        val containers = arrayOf(R.id.image1, R.id.image2, R.id.image3)
+        currentData.thumbsList.forEachIndexed { index, value ->
+            thumbImage1 = view.findViewById<ImageView>(containers[index])
+            downloadImage(value.imageUrl, thumbImage1)
+        }
+
         content.setOnClickListener{
-            Toast.makeText(context, data[position], Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, data[position], Toast.LENGTH_SHORT).show()
         }
         return view
     }
 
     override fun getItem(position: Int): Any {
-        return data[position]
+        return data!![position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -40,7 +63,24 @@ class NearbyCatAdapter(val context: Context, val data: List<String>) : BaseAdapt
     }
 
     override fun getCount(): Int {
-        return data.size
+        return data!!.size
     }
 
+    private fun downloadImage(imageUrl: String, container: ImageView) {
+        val baseUrl = "http://10.0.2.2:8080/catnip"
+        DownloadImageAsyncTask().execute(Pair(baseUrl + imageUrl, container))
+    }
+
+    inner class DownloadImageAsyncTask: AsyncTask<Pair<String, ImageView>, Unit, Pair<Bitmap, ImageView>?>() {
+        override fun doInBackground(vararg params: Pair<String, ImageView>?): Pair<Bitmap, ImageView>? {
+            val downloadedImage = HttpUtils().doDownloadImage(params[0]!!.first)
+            val container1 = params[0]!!.second
+            return Pair(downloadedImage!!, container1)
+        }
+
+        override fun onPostExecute(result: Pair<Bitmap, ImageView>??) {
+            super.onPostExecute(result)
+            result!!.second.setImageBitmap(result.first)
+        }
+    }
 }

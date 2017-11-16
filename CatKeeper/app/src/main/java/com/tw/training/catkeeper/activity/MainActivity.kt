@@ -2,6 +2,7 @@ package com.tw.training.catkeeper.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,15 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     private val mImageResIds = arrayListOf<Int>(R.mipmap.banner_icon_1, R.mipmap.banner_icon_2,
             R.mipmap.banner_icon_3, R.mipmap.banner_icon_4)
 
+    private var mHandler: Handler = Handler()
+    private var mRunnable = object: Runnable {
+        override fun run() {
+            mViewPager.currentItem++
+            mHandler.postDelayed(this, 5000)
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,12 +43,17 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         setupFragment()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mHandler.post(mRunnable)
+    }
+
     private fun initTab() {
         mLeftTab = findViewById(R.id.left_tab_btn)
         mRightTab = findViewById(R.id.right_tab_btn)
 
-        mLeftTab.isPressed = true
-        mRightTab.isPressed = false
+        mLeftTab.isEnabled = false
+        mRightTab.isEnabled = true
 
         mLeftTab.setOnClickListener {
             switchToNearbyCats()
@@ -103,10 +118,8 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     }
 
     private fun switchToMyCat() {
-        mLeftTab.isPressed = false
-        mLeftTab.isSelected = false
-        mRightTab.isPressed = true
-        mRightTab.isSelected = true
+        mLeftTab.isEnabled = true
+        mRightTab.isEnabled = false
         myCatFragment = MyCatFragment()
         var transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, myCatFragment)
@@ -114,13 +127,16 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     }
 
     private fun switchToNearbyCats() {
-        mLeftTab.isPressed = true
-        mLeftTab.isSelected = true
-        mRightTab.isPressed = false
-        mRightTab.isSelected = false
+        mLeftTab.isEnabled = false
+        mRightTab.isEnabled = true
         nearbyCatFragment = NearbyCatFragment()
         var transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, nearbyCatFragment)
         transaction.commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHandler.removeCallbacks(mRunnable)
     }
 }

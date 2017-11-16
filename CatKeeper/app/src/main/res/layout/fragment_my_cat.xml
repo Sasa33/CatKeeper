@@ -3,7 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
-        android:text="my cats"
+        android:textAlignment="center"
+        android:layout_gravity="center_vertical"
+        android:text="Sorry, you have no cat."
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" />
+    <TextView
+        android:textAlignment="center"
+        android:layout_gravity="center_vertical"
+        android:text="Want to adopt one from the cloud."
         android:layout_height="match_parent"
         android:layout_width="match_parent" />
 </FrameLayout>
