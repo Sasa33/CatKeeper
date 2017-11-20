@@ -36,25 +36,33 @@
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:id="@+id/image1"
+        <LinearLayout
+            android:id="@+id/thumbContainer"
             android:layout_alignLeft="@+id/name"
             android:layout_below="@+id/description"
-            android:layout_marginRight="13dp"
-            android:layout_width="@dimen/ui_size_100"
-            android:layout_height="@dimen/ui_size_100" />
-        <ImageView
-            android:id="@+id/image2"
-            android:layout_toRightOf="@+id/image1"
-            android:layout_below="@+id/description"
-            android:layout_marginRight="13dp"
-            android:layout_width="@dimen/ui_size_100"
-            android:layout_height="@dimen/ui_size_100" />
-        <ImageView
-            android:id="@+id/image3"
-            android:layout_toRightOf="@+id/image2"
-            android:layout_below="@+id/description"
-            android:layout_width="@dimen/ui_size_100"
-            android:layout_height="@dimen/ui_size_100" />
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/image1"-->
+            <!--android:layout_alignLeft="@+id/name"-->
+            <!--android:layout_below="@+id/description"-->
+            <!--android:layout_marginRight="13dp"-->
+            <!--android:layout_width="@dimen/ui_size_100"-->
+            <!--android:layout_height="@dimen/ui_size_100" />-->
+        <!--<ImageView-->
+            <!--android:id="@+id/image2"-->
+            <!--android:layout_toRightOf="@+id/image1"-->
+            <!--android:layout_below="@+id/description"-->
+            <!--android:layout_marginRight="13dp"-->
+            <!--android:layout_width="@dimen/ui_size_100"-->
+            <!--android:layout_height="@dimen/ui_size_100" />-->
+        <!--<ImageView-->
+            <!--android:id="@+id/image3"-->
+            <!--android:layout_toRightOf="@+id/image2"-->
+            <!--android:layout_below="@+id/description"-->
+            <!--android:layout_width="@dimen/ui_size_100"-->
+            <!--android:layout_height="@dimen/ui_size_100" />-->
     </RelativeLayout>
 </RelativeLayout>

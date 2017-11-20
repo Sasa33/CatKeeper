@@ -1,19 +1,36 @@
 package com.tw.training.catkeeper.presenter
 
-import android.graphics.Bitmap
 import android.os.AsyncTask
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.tw.training.catkeeper.domain.CatsNearby
+import com.tw.training.catkeeper.domain.GetNearbyCatResponse
+import com.tw.training.catkeeper.network.HttpManagerFactory
 import com.tw.training.catkeeper.utils.HttpUtils
 import org.json.JSONObject
+import rx.Subscriber
 
 
 class CatsNearbyPresenter(private val mCatsNearbyView: CatsNearbyContract.View): CatsNearbyContract.Presenter {
 //    private var mCatsNearbyTask: CatsNearbyAsyncTask?
 
     override fun start() {
-        loadingCatsNearbyList()
+//        loadingCatsNearbyList()
+
+        HttpManagerFactory.getHttpManager().getCat(object : Subscriber<GetNearbyCatResponse>() {
+            override fun onError(e: Throwable?) {
+                mCatsNearbyView.onGetDataFail(e.toString())
+            }
+
+            override fun onNext(response: GetNearbyCatResponse?) {
+                mCatsNearbyView.onGetDataSucceed(response!!.moments)
+            }
+
+            override fun onCompleted() {
+
+            }
+
+        })
     }
 
     override fun stop() {

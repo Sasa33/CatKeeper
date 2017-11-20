@@ -13,11 +13,24 @@ import android.widget.Toast
 import com.tw.training.catkeeper.R
 import com.tw.training.catkeeper.adapter.NearbyCatAdapter
 import com.tw.training.catkeeper.domain.CatsNearby
+import com.tw.training.catkeeper.domain.GetNearbyCatResponse
 import com.tw.training.catkeeper.presenter.CatsNearbyContract
 import com.tw.training.catkeeper.presenter.CatsNearbyPresenter
 
 
 class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnItemClickListener {
+    override fun onGetDataSucceed(data: List<GetNearbyCatResponse.MomentsBean>?) {
+        mListView.adapter = NearbyCatAdapter(activity, data)
+//        mCatsNearbyAdapter.data = data
+//        mCatsNearbyAdapter.notifyDataSetChanged()
+//        Toast.makeText(context, "get data succeed", Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun onGetDataFail(msg: String) {
+        Toast.makeText(context, "get data failed", Toast.LENGTH_SHORT).show()
+    }
+
     private val mPresenter = CatsNearbyPresenter(this)
 
     private lateinit var mCatsNearbyAdapter: NearbyCatAdapter
@@ -32,7 +45,7 @@ class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnIte
     }
 
     override fun showNearbyCats(catsNearby: List<CatsNearby>?) {
-        mListView.adapter = NearbyCatAdapter(activity, catsNearby)
+//        mListView.adapter = NearbyCatAdapter(activity, catsNearby)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -60,6 +73,7 @@ class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnIte
     override fun onResume() {
         super.onResume()
         Log.i("cat_keeper", "fragment onresume")
+        mPresenter.start()
     }
 
 
