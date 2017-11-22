@@ -1,5 +1,6 @@
 package com.tw.training.catkeeper.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
@@ -11,7 +12,10 @@ import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
 import com.tw.training.catkeeper.R
+import com.tw.training.catkeeper.activity.DetailsActivity
+import com.tw.training.catkeeper.activity.MainActivity
 import com.tw.training.catkeeper.adapter.NearbyCatAdapter
+import com.tw.training.catkeeper.domain.Cat
 import com.tw.training.catkeeper.domain.CatsNearby
 import com.tw.training.catkeeper.domain.GetNearbyCatResponse
 import com.tw.training.catkeeper.presenter.CatsNearbyContract
@@ -19,7 +23,10 @@ import com.tw.training.catkeeper.presenter.CatsNearbyPresenter
 
 
 class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnItemClickListener {
+    private lateinit var catsData: List<GetNearbyCatResponse.MomentsBean>
+
     override fun onGetDataSucceed(data: List<GetNearbyCatResponse.MomentsBean>?) {
+        catsData = data!!
         mListView.adapter = NearbyCatAdapter(activity, data)
 //        mCatsNearbyAdapter.data = data
 //        mCatsNearbyAdapter.notifyDataSetChanged()
@@ -35,7 +42,11 @@ class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnIte
 
     private lateinit var mCatsNearbyAdapter: NearbyCatAdapter
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        Toast.makeText(activity, "item clicked:" + p2, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(activity, "item clicked:" + p2, Toast.LENGTH_SHORT).show()
+        Log.i("cats_nearby", "Item clicked!")
+        val intent = Intent(super.getContext(), DetailsActivity::class.java)
+        intent.putExtra("catId", catsData[p2].id!!)
+        startActivity(intent)
     }
 
     private lateinit var mListView: ListView
@@ -52,6 +63,9 @@ class NearbyCatFragment : Fragment(), CatsNearbyContract.View, AdapterView.OnIte
         super.onViewCreated(view, savedInstanceState)
 
         mListView = view!!.findViewById(R.id.listView)
+        mListView.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS)
+
+        mListView.onItemClickListener = this
 
 //        setupListView()
 

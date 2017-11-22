@@ -30,4 +30,5 @@
     <dimen name="ui_size_350">350dp</dimen>
     <dimen name="ui_size_8">8dp</dimen>
     <dimen name="ui_size_100">100dp</dimen>
+    <dimen name="ui_size_20">20dp</dimen>
 </resources>

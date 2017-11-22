@@ -1,5 +1,6 @@
 package com.tw.training.catkeeper.presenter
 
+import com.tw.training.catkeeper.domain.Cat
 import com.tw.training.catkeeper.domain.CatsNearby
 import com.tw.training.catkeeper.domain.GetNearbyCatResponse
 

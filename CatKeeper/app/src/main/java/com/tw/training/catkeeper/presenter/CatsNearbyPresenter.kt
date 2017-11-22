@@ -3,6 +3,7 @@ package com.tw.training.catkeeper.presenter
 import android.os.AsyncTask
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
+import com.tw.training.catkeeper.domain.Cat
 import com.tw.training.catkeeper.domain.CatsNearby
 import com.tw.training.catkeeper.domain.GetNearbyCatResponse
 import com.tw.training.catkeeper.network.HttpManagerFactory
