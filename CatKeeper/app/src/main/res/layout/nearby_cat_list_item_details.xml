@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tw.training.catkeeper.activity.DetailsActivity">
-<RelativeLayout
+    <RelativeLayout
         android:id="@+id/content"
         android:background="@color/paleGrey"
         android:layout_width="match_parent"
@@ -13,17 +13,17 @@
         android:orientation="vertical">
         <LinearLayout
             android:id="@+id/back"
-            android:padding="@dimen/ui_size_20"
+            android:layout_margin="@dimen/ui_size_10"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="40dp">
             <ImageView
                 android:src="@mipmap/back"
-                android:layout_width="@dimen/ui_size_30"
-                android:layout_height="@dimen/ui_size_30" />
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
             <TextView
                 android:id="@+id/back_text"
                 android:text="Back"
-                android:textSize="22dp"
+                android:textSize="30sp"
                 android:textColor="@color/brightBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -31,13 +31,18 @@
 
         <TextView
             android:id="@+id/cat_name"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/ui_size_10"
+            android:textSize="30sp"
+            android:text="name"
+            android:textColor="#000"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
             android:id="@+id/banner"
+            android:src="@mipmap/catd"
+            android:scaleType="fitXY"
             android:layout_below="@+id/back"
             android:layout_marginTop="@dimen/ui_size_10"
             android:layout_width="fill_parent"
@@ -45,91 +50,88 @@
 
         <TextView
             android:layout_centerHorizontal="true"
-            android:layout_above="@id/avatar_big"
+            android:textSize="32sp"
+            android:textColor="#fff"
+            android:layout_above="@+id/avatar_big"
+            android:layout_marginBottom="60dp"
+            android:text="test..."
             android:id="@+id/message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <ImageView
-
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/ui_size_210"
+            android:layout_below="@+id/banner"
+            android:layout_marginTop="-60dp"
+            android:src="@mipmap/cata"
             android:id="@+id/avatar_big"
-            android:layout_width="@dimen/ui_size_80"
-            android:layout_height="@dimen/ui_size_80" />
+            android:layout_width="120dp"
+            android:layout_height="120dp" />
 
         <TextView
-            android:layout_marginBottom="20dp"
+            android:layout_marginVertical="15dp"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/avatar_big"
+            android:textSize="18sp"
             android:id="@+id/intro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
-        <!--<LinearLayout-->
-            <!--android:layout_below="@id/intro"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="80dp">-->
-            <ImageView
-                android:id="@+id/icon1"
-                android:layout_marginLeft="@dimen/ui_size_40"
-                android:layout_below="@id/intro"
-                android:src="@mipmap/star"
-                android:layout_width="@dimen/ui_size_30"
-                android:layout_height="@dimen/ui_size_30" />
-
-            <TextView
-                android:layout_marginTop="40dp"
-                android:layout_below="@+id/intro"
-                android:id="@+id/stars"
-                android:text="389 stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_marginLeft="@dimen/ui_size_80"
-                android:layout_alignBottom="@id/icon1"
-                android:src="@mipmap/heart"
-                android:layout_width="@dimen/ui_size_30"
-                android:layout_height="@dimen/ui_size_30" />
-
-            <TextView
-                android:layout_alignBottom="@+id/stars"
-                android:layout_marginLeft="@dimen/ui_size_80"
-                android:text="389 follows"
-                android:id="@+id/follows"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_marginLeft="160dp"
-                android:layout_alignBottom="@id/icon1"
-                android:src="@mipmap/fish"
-                android:layout_width="@dimen/ui_size_30"
-                android:layout_height="@dimen/ui_size_30" />
-
-            <TextView
-                android:layout_alignBottom="@+id/stars"
-                android:layout_marginLeft="160dp"
-                android:text="99 fishes"
-                android:id="@+id/fishes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <ImageView
-                android:layout_marginLeft="240dp"
-                android:layout_alignBottom="@id/icon1"
-                android:src="@mipmap/polygon"
-                android:layout_width="@dimen/ui_size_30"
-                android:layout_height="@dimen/ui_size_30" />
-
-            <TextView
-                android:layout_alignBottom="@+id/stars"
-                android:layout_marginLeft="240dp"
-                android:text="58 adopted"
-                android:id="@+id/adopted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        <!--</LinearLayout>-->
+        <TableLayout
+            android:layout_below="@id/intro"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="80dp"
+            android:layout_width="wrap_content" >
+            <TableRow android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/icon1"
+                    android:src="@mipmap/star"
+                    android:layout_width="@dimen/ui_size_30"
+                    android:layout_height="@dimen/ui_size_30" />
+                <ImageView
+                    android:layout_alignBottom="@id/icon1"
+                    android:src="@mipmap/heart"
+                    android:layout_width="@dimen/ui_size_30"
+                    android:layout_height="@dimen/ui_size_30" />
+                <ImageView
+                    android:layout_alignBottom="@id/icon1"
+                    android:layout_marginVertical="@dimen/ui_size_4"
+                    android:src="@mipmap/fish"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:src="@mipmap/polygon"
+                    android:layout_width="@dimen/ui_size_30"
+                    android:layout_height="@dimen/ui_size_30" />
+            </TableRow>
+            <TableRow android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:padding="@dimen/ui_size_10"
+                    android:id="@+id/stars"
+                    android:text="389 stars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:padding="@dimen/ui_size_10"
+                    android:text="389 follows"
+                    android:id="@+id/follows"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:padding="@dimen/ui_size_10"
+                    android:text="99 fishes"
+                    android:id="@+id/fishes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:padding="@dimen/ui_size_10"
+                    android:text="58 adopted"
+                    android:id="@+id/adopted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
     </RelativeLayout>
 </RelativeLayout>

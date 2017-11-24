@@ -116,7 +116,7 @@ class NearbyCatAdapter(val context: Context, var data: List<GetNearbyCatResponse
             return Pair(downloadedImage!!, container1)
         }
 
-        override fun onPostExecute(result: Pair<Bitmap, ImageView>??) {
+        override fun onPostExecute(result: Pair<Bitmap, ImageView>?) {
             super.onPostExecute(result)
             result!!.second.setImageBitmap(result.first)
         }

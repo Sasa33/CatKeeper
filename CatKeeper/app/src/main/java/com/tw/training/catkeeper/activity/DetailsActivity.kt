@@ -1,8 +1,10 @@
 package com.tw.training.catkeeper.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +26,8 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
     private lateinit var mFollows: TextView
     private lateinit var mFishes: TextView
     private lateinit var mAdopted: TextView
+    private lateinit var mBack: View
+
     private val presenter = CatDetailPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +44,13 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
         mFishes = findViewById(R.id.fishes)
         mAdopted = findViewById(R.id.adopted)
 
+        mBack = findViewById(R.id.back)
+
+        mBack.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
         val catId = intent.getStringExtra("catId")
         presenter.start(catId)
     }
@@ -48,7 +59,7 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
     override fun showCatDetails(cat: Cat?) {
         val baseUrl = "http://10.0.2.2:8080/catnip"
         Glide.with(this).load(baseUrl + cat!!.banner.imageUrl).into(mBanner)
-        Glide.with(this).load(baseUrl + cat!!.avatar.imageUrl).into(mAvatar)
+        Glide.with(this).load(baseUrl + cat.avatar.imageUrl).into(mAvatar)
 
         mName.text = cat.cat
         mMessage.text = cat.message
