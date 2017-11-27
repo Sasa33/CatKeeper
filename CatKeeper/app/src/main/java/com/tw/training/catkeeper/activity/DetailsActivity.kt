@@ -32,8 +32,15 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.nearby_cat_list_item_details)
+        setContentView(R.layout.loading_screen)
 
+        val catId = intent.getStringExtra("catId")
+        presenter.start(catId)
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun showCatDetails(cat: Cat?) {
+        setContentView(R.layout.nearby_cat_list_item_details)
         mName = findViewById(R.id.cat_name)
         mBanner = findViewById(R.id.banner)
         mMessage = findViewById(R.id.message)
@@ -51,12 +58,6 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
             finish()
         }
 
-        val catId = intent.getStringExtra("catId")
-        presenter.start(catId)
-    }
-
-    @SuppressLint("SetTextI18n")
-    override fun showCatDetails(cat: Cat?) {
         val baseUrl = "http://10.0.2.2:8080/catnip"
         Glide.with(this).load(baseUrl + cat!!.banner.imageUrl).into(mBanner)
         Glide.with(this).load(baseUrl + cat.avatar.imageUrl).into(mAvatar)
@@ -74,5 +75,6 @@ class DetailsActivity : AppCompatActivity(), CatDetailContract.View {
 
     override fun onDownloadFailed(msg: String) {
         Toast.makeText(this, "get data failed", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

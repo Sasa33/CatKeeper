@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.EditText
+import android.widget.Toast
 import com.tw.training.catkeeper.R
 import com.tw.training.catkeeper.presenter.LoginContract
 import com.tw.training.catkeeper.presenter.LoginPresenter
@@ -53,6 +54,10 @@ class LoginActivity : AppCompatActivity(), KeyboardWatcher.SoftKeyboardStateList
         Log.d(TAG, "login successful!")
         startActivity(Intent(this, MainActivity::class.java))
         finish()
+    }
+
+    override fun loginFailed() {
+        Toast.makeText(this, "Invalid Username and Password", Toast.LENGTH_SHORT).show()
     }
 
     override fun onResume() {

@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private var mPreviousPosition: Int = 0
 
-    private val mImageResIds = arrayListOf<Int>(R.mipmap.banner_icon_1, R.mipmap.banner_icon_2,
+    private val viewPagerInitItem = 0
+
+    private val mImageResIds = arrayListOf(R.mipmap.banner_icon_1, R.mipmap.banner_icon_2,
             R.mipmap.banner_icon_3, R.mipmap.banner_icon_4)
 
     private var mHandler: Handler = Handler()
@@ -68,12 +70,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         mViewPager = findViewById(R.id.viewpager)
         mIndicatorView = findViewById(R.id.indicator_view)
 
-        var imageList = ArrayList<ImageView>()
-//        mImageResIds.forEach { id ->
-//            val iv = ImageView(this)
-//            iv.scaleType = ImageView.ScaleType.FIT_XY
-//            iv.setImageResource(id)
-//        }
+        val imageList = ArrayList<ImageView>()
 
         mImageResIds.forEach {
             val iv = ImageView(this)
@@ -84,8 +81,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
         mViewPager.adapter = BannerAdapter(imageList)
         mViewPager.addOnPageChangeListener(this)
-        mPreviousPosition = mViewPager.currentItem
-
+        mViewPager.currentItem = viewPagerInitItem
     }
 
     override fun onPageScrollStateChanged(state: Int) {
@@ -95,8 +91,9 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     }
 
     override fun onPageSelected(position: Int) {
-        updateIndicator(position)
-        mPreviousPosition = position
+        val newPosition = position % mImageResIds.size
+        updateIndicator(newPosition)
+        mPreviousPosition = newPosition
     }
 
     private fun updateIndicator(position: Int) {
@@ -112,7 +109,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private fun setupFragment() {
         nearbyCatFragment = NearbyCatFragment()
-        var transaction = supportFragmentManager.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, nearbyCatFragment)
         transaction.commit()
     }
@@ -121,7 +118,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         mLeftTab.isEnabled = true
         mRightTab.isEnabled = false
         myCatFragment = MyCatFragment()
-        var transaction = supportFragmentManager.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, myCatFragment)
         transaction.commit()
     }
@@ -130,7 +127,7 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
         mLeftTab.isEnabled = false
         mRightTab.isEnabled = true
         nearbyCatFragment = NearbyCatFragment()
-        var transaction = supportFragmentManager.beginTransaction()
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_container, nearbyCatFragment)
         transaction.commit()
     }

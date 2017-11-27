@@ -18,12 +18,12 @@
             android:layout_height="40dp">
             <ImageView
                 android:src="@mipmap/back"
-                android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_width="35dp"
+                android:layout_height="35dp" />
             <TextView
                 android:id="@+id/back_text"
                 android:text="Back"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textColor="@color/brightBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/cat_name"
-            android:layout_marginTop="@dimen/ui_size_10"
+            android:layout_marginTop="@dimen/ui_size_4"
             android:textSize="30sp"
             android:text="name"
             android:textColor="#000"
@@ -44,7 +44,7 @@
             android:src="@mipmap/catd"
             android:scaleType="fitXY"
             android:layout_below="@+id/back"
-            android:layout_marginTop="@dimen/ui_size_10"
+            android:layout_marginTop="@dimen/ui_size_6"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/ui_size_200" />
 

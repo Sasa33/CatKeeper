@@ -10,8 +10,6 @@ import com.tw.training.catkeeper.R
 
 
 class MyCatFragment : Fragment() {
-    private lateinit var mText: TextView
-
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.fragment_my_cat, container, false)
     }

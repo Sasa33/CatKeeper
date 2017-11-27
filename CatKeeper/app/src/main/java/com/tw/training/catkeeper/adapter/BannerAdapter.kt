@@ -17,12 +17,12 @@ class BannerAdapter(imageList: List<ImageView>): PagerAdapter() {
     }
 
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-        val imageView: ImageView = mImageList[position%mImageList.size]
+        val imageView: ImageView = mImageList[position % mImageList.size]
         container?.addView(imageView)
         return imageView
     }
 
     override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-        container?.removeView(mImageList[position%mImageList.size])
+        container?.removeView(mImageList[position % mImageList.size])
     }
 }

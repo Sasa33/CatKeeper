@@ -7,6 +7,7 @@ interface LoginContract {
 
     interface View {
         fun loginSuccess()
+        fun loginFailed()
     }
 }
 
