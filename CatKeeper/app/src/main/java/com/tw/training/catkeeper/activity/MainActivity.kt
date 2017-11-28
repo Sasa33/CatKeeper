@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
 
     private var mPreviousPosition: Int = 0
 
+    private val numOfBannerImgs = 4
     private val viewPagerInitItem = 0
+    private var currentPage = 0
 
     private val mImageResIds = arrayListOf(R.mipmap.banner_icon_1, R.mipmap.banner_icon_2,
             R.mipmap.banner_icon_3, R.mipmap.banner_icon_4)
@@ -28,7 +30,10 @@ class MainActivity : AppCompatActivity(), ViewPager.OnPageChangeListener {
     private var mHandler: Handler = Handler()
     private var mRunnable = object: Runnable {
         override fun run() {
-            mViewPager.currentItem++
+            if (currentPage == numOfBannerImgs) {
+                currentPage = 0
+            }
+            mViewPager.currentItem = currentPage++
             mHandler.postDelayed(this, 5000)
         }
 
